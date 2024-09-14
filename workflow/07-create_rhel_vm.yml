@@ -1,0 +1,26 @@
+---
+- name: Create the Azure RHEL Virtual Machine
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: Create RHEL VM
+      azure.azcollection.azure_rm_virtualmachine:
+        resource_group: "{{ resource_group_name }}"
+        name: "{{ rhel_vm_name }}"
+        managed_disk_type: "Standard_LRS"
+        vm_size: "{{ rhel_vm_size }}"
+        admin_username: "{{ rhel_admin_user }}"
+        admin_password: "{{ rhel_admin_password }}"
+        network_interfaces: "{{ rhel_nic_name }}"
+        ssh_password_enabled: true
+        ssh_public_keys: "{{ rhel_ssh_public_keys | default(omit) }}"
+        tags:
+          "name": "{{ rhel_vm_name }}"
+          "demo": "true"
+          "os": "linux"
+          "username": "{{ rhel_admin_user }}"
+        image:
+          offer: RHEL
+          publisher: RedHat
+          sku: "{{ rhel_vm_sku }}"
+          version: latest

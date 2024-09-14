@@ -12,4 +12,4 @@
         subnet: "{{ subnet_name }}"
         ip_configurations:
           - name: ipconfig1
-            public_ip_address_name: "{{ win_public_ip_name }}"
+            public_ip_address: "{{ win_public_ip_name }}"
